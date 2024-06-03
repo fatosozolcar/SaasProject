@@ -65,7 +65,17 @@ namespace MextFullstackSaaS.Infrastructure.Services
            var user = await _userManager.FindByEmailAsync(email);
            if (user is null) return false;
            return await _userManager.CheckPasswordAsync(user, password);
-    }
+        }
+        public async Task<bool> VerifyEmailAsync(UserAuthVerifyEmailCommand command, CancellationToken cancellationToken)
+        {
+            var user = await _userManager.FindByEmailAsync(command.Email);
+            var result = await _userManager.ConfirmEmailAsync(user, command.Token);
+            if(!result.Succeeded)
+            {
+                throw new Exception("User Email verification failed");
+            }
+            return result.Succeeded;
+        }
 
         
     }

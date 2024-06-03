@@ -2,6 +2,7 @@
 using MextFullstackSaaS.Application.Common.Models.Auth;
 using MextFullstackSaaS.Application.Features.UserAuth.Commands.Login;
 using MextFullstackSaaS.Application.Features.UserAuth.Commands.Register;
+using MextFullstackSaaS.Application.Features.UserAuth.Commands.VerifyEmail;
 using Microsoft.AspNetCore.Identity;
 
 namespace MextFullstackSaaS.Application.Common.Interfaces
@@ -13,6 +14,8 @@ namespace MextFullstackSaaS.Application.Common.Interfaces
         //Task<JwtDto> SignInAsync(UserAuthRegisterCommand command, CancellationToken cancellationToken);
         Task<bool> IsEmailExistsAsync(string email, CancellationToken cancellationToken);
         Task<bool> CheckPasswordSignInAsync(string email,string password, CancellationToken cancellationToken);
+        Task<bool> VerifyEmailAsync(UserAuthVerifyEmailCommand command, CancellationToken cancellationToken);
+         Task<bool> CheckIfEmailVerifiedAsync(string email,CancellationToken cancellationToken);
        
        
     }

@@ -31,6 +31,10 @@ namespace MextFullstackSaaS.Application.Features.UserAuth.Commands.Login
         RuleFor(x => x.Email)
            .MustAsync((x, y, cancellationToken) => CheckPasswordSignInAsync(x.Email, x.Password, cancellationToken))
            .WithMessage("Your Email or password is incorrect.");
+
+        RuleFor(x => x.Email)
+           .MustAsync( CheckIfEmailVerifiedAsync)
+           .WithMessage("Your Email is not verified.");
     }
     private  Task<bool> CheckIfUserExists(string email, CancellationToken cancellationToken )
     {
@@ -40,6 +44,9 @@ namespace MextFullstackSaaS.Application.Features.UserAuth.Commands.Login
     private async Task<bool> CheckPasswordSignInAsync(string email, string password, CancellationToken cancellationToken)
     {
         return await _identityService.CheckPasswordSignInAsync(email, password, cancellationToken);
+    }
+    private Task<bool> CheckIfEmailVerifiedAsync(string email,CancellationToken cancellationToken){
+        return _identityService.IsEmailExistsAsync(email, cancellationToken);
     }
 
 }

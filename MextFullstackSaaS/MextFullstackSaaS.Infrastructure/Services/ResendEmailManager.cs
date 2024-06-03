@@ -18,7 +18,7 @@ public class ResendEmailManager:IEmailService
     {
         // https://codeshare.io/64xePY
         
-        var link = $"{ApiBaseUrl}UsersAuth/VerifyEmail?email={emailDto.Email}&token={emailDto.Token}";
+        var link = $"{ApiBaseUrl}UsersAuth/verify-email?email={emailDto.Email}&token={emailDto.Token}";
         
         var message = new EmailMessage();
         message.From = "onboarding@resend.dev";
