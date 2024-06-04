@@ -1,3 +1,4 @@
+using System.Web;
 using MextFullstackSaaS.Application.Common.Interfaces;
 using MextFullstackSaaS.Application.Common.Models.Emails;
 using Resend;
@@ -17,9 +18,13 @@ public class ResendEmailManager:IEmailService
     public Task SendEmailVerificationAsync(EmailSendEmailVerificationDto emailDto, CancellationToken cancellationToken)
     {
         // https://codeshare.io/64xePY
+
+        var encodedEmail = HttpUtility.UrlEncode(emailDto.Email);
+     
+        var encodedToken = HttpUtility.UrlEncode(emailDto.Token);
         
         var link = $"{ApiBaseUrl}UsersAuth/verify-email?email={emailDto.Email}&token={emailDto.Token}";
-        
+
         var message = new EmailMessage();
         message.From = "onboarding@resend.dev";
         message.To.Add( emailDto.Email);

@@ -43,5 +43,8 @@
         public string Message { get; set; }
         public List<ErrorDto> Errors { get; set; }
         public T Data { get; set; }
+
+        
     }
+
 }

@@ -5,13 +5,12 @@ namespace MextFullstackSaaS.Application.Features.UserAuth.Commands.Register;
 
 public class UserAuthRegisterCommandValidator:AbstractValidator<UserAuthRegisterCommand>
 {
-     private readonly IIdentityService _identityService;
-    
-
-    public UserAuthRegisterCommandValidator(IIdentityService identityService )
+    private readonly IIdentityService _identityService;
+    public UserAuthRegisterCommandValidator(IIdentityService identityService)
     {
         _identityService = identityService;
         
+        https://codeshare.io/zlPJyO
         RuleFor(x => x.Email)
             .NotEmpty().WithMessage("Email is required")
             .EmailAddress().WithMessage("Email is not valid");
@@ -29,13 +28,13 @@ public class UserAuthRegisterCommandValidator:AbstractValidator<UserAuthRegister
 
         RuleFor(x => x.LastName)
             .NotEmpty().WithMessage("Last name is required");
-
-        RuleFor(x => x.Email)
-           .MustAsync(CheckIfUserExists)
-           .WithMessage("Email already exists");
+        
+        RuleFor(x=>x.Email)
+            .MustAsync(CheckIfUserExists)
+            .WithMessage("User with this email already exists");
     }
-
-    private async Task<bool> CheckIfUserExists(string email, CancellationToken cancellationToken )
+    
+    private async Task<bool> CheckIfUserExists(string email, CancellationToken cancellationToken)
     {
         return !await _identityService.IsEmailExistsAsync(email, cancellationToken);
     }

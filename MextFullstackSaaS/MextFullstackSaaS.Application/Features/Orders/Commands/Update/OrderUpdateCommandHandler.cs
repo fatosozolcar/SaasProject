@@ -1,25 +1,23 @@
-﻿using MediatR;
+using MediatR;
 using MextFullstackSaaS.Application.Common.Interfaces;
 using MextFullstackSaaS.Application.Common.Models;
+using MextFullstackSaaS.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace MextFullstackSaaS.Application.Features.Orders.Commands.Delete
+namespace MextFullstackSaaS.Application.Features.Orders.Commands.Update
 {
-    public class OrderDeleteCommandHandler : IRequestHandler<OrderDeleteCommand, ResponseDto<Guid>>
+    public class OrderUpdateCommandHandler : IRequestHandler<OrderUpdateCommand, ResponseDto<Guid>>
     {
         private readonly IApplicationDbContext _dbContext;
         private readonly ICurrentUserService _currentUserService;
 
-        public OrderDeleteCommandHandler(IApplicationDbContext dbContext, ICurrentUserService currentUserService)
+        public OrderUpdateCommandHandler(IApplicationDbContext dbContext, ICurrentUserService currentUserService)
         {
             _dbContext = dbContext;
             _currentUserService = currentUserService;
         }
 
-        public async Task<ResponseDto<Guid>> Handle(OrderDeleteCommand request, CancellationToken cancellationToken)
+        public async Task<ResponseDto<Guid>> Handle(OrderUpdateCommand request, CancellationToken cancellationToken)
         {
             var existingOrder = await _dbContext.Orders.FirstOrDefaultAsync(o => o.Id == request.Id, cancellationToken);
 
@@ -28,12 +26,13 @@ namespace MextFullstackSaaS.Application.Features.Orders.Commands.Delete
                 return new ResponseDto<Guid>(Guid.Empty, "Order not found or access denied.");
             }
 
-            _dbContext.Orders.Remove(existingOrder);
+            var order = OrderUpdateCommand.MapToOrder(request, existingOrder);
+
+            _dbContext.Orders.Update(order);
+
             await _dbContext.SaveChangesAsync(cancellationToken);
 
-            return new ResponseDto<Guid>(existingOrder.Id, "Your order has been successfully deleted.");
+            return new ResponseDto<Guid>(order.Id, "Your order updated successfully.");
         }
-
-        
     }
 }
