@@ -25,6 +25,7 @@ namespace MextFullstackSaaS.Application.Features.Orders.Commands.Delete
             RuleFor(x => x.Id)
                 .MustAsync(IsOrderExists)
                 .WithMessage("The selected order does not exist in the database.");
+                
         }
 
         public Task<bool> IsOrderExists(Guid id, CancellationToken cancellationToken)

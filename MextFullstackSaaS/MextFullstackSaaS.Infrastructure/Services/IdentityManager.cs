@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Web;
 using MextFullstackSaaS.Application.Common.Interfaces;
 using MextFullstackSaaS.Application.Common.Models;
 using MextFullstackSaaS.Application.Common.Models.Auth;
@@ -70,8 +71,10 @@ namespace MextFullstackSaaS.Infrastructure.Services
         public async Task<bool> VerifyEmailAsync(UserAuthVerifyEmailCommand command, CancellationToken cancellationToken)
         {
             var user = await _userManager.FindByEmailAsync(command.Email);
+
+             var decodedToken = HttpUtility.UrlDecode(command.Token);
             
-            var result = await _userManager.ConfirmEmailAsync(user, command.Token);
+            var result = await _userManager.ConfirmEmailAsync(user, decodedToken);
 
             if (!result.Succeeded)
             {
@@ -84,6 +87,16 @@ namespace MextFullstackSaaS.Infrastructure.Services
         public Task<bool> CheckIfEmailVerifiedAsync(string email, CancellationToken cancellationToken)
         {
             return _userManager.Users.AnyAsync(x => x.Email == email && x.EmailConfirmed, cancellationToken);
+        }
+
+        public Task<bool> ForgotPasswordAsync(string email, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> ResetPasswordAsync(string email, string token, string password, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }

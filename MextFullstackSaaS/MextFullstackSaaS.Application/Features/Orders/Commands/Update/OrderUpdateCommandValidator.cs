@@ -49,9 +49,20 @@ namespace MextFullstackSaaS.Application.Features.Orders.Commands.Update
 
             RuleFor(x => x.Id)
                 .Must(IsUserIdValid)
-                .WithMessage("You need to be logged-in to update an order.");
+                .WithMessage("You need to be logged-in to update an order.");   
+        }      
+
+        private bool IsUserIdValid(Guid guid)
+        {
+            throw new NotImplementedException();
         }
 
-        private bool IsUserIdValid(Guid id) => _currentUserService.UserId != Guid.Empty;
+        public bool IsUserIdValid(OrderUpdateCommand orderUpdateCommand)
+        {
+            return _currentUserService.UserId == orderUpdateCommand.Id;
+        }
+
+        
+
     }
 }

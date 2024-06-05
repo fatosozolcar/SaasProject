@@ -1,8 +1,9 @@
 using MextFullstackSaaS.Application.Common.Models.Emails;
 
-namespace MextFullstackSaaS.Application.Common.Interfaces;
-
-public interface IEmailService
+namespace MextFullstackSaaS.Application.Common.Interfaces
 {
-    Task SendEmailVerificationAsync(EmailSendEmailVerificationDto emailDto,CancellationToken cancellationToken);
+    public interface IEmailService
+    {
+        Task SendEmailVerificationAsync(EmailSendEmailVerificationDto emailDto, CancellationToken cancellationToken);
+    }
 }
