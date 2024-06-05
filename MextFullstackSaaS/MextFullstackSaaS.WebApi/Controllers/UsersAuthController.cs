@@ -39,7 +39,7 @@ public class UsersAuthController : ControllerBase
         return Ok(await _mediatr.Send(command, cancellationToken));
     }
 
-    [HttpPost("forgot-password")]
+    [HttpGet("forgot-password")]
     public async Task<IActionResult> ForgotPasswordAsync([FromQuery] UserAuthForgotPasswordCommand command, CancellationToken cancellationToken)
     {
         return Ok(await _mediatr.Send(command, cancellationToken));

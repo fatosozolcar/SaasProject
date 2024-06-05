@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Resend;
 using System.Web;
 using MextFullstackSaaS.Domain.Identity;
 
@@ -67,7 +66,7 @@ namespace MextFullstackSaaS.Infrastructure.Services
             message.Subject = "Password Reset Confirmation | IconBuilderAI";
             message.HtmlBody = $"<div><strong>Your password has been successfully reset.</strong></div>";
 
-            Console.WriteLine($"Token: {emailDto.Token}");
+            
 
             return _resend.EmailSendAsync(message, cancellationToken);
         }
