@@ -4,10 +4,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace MextFullstackSaaS.Infrastructure.Persistence.Migrations.ApplicationDB
+namespace MextFullstackSaaS.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class mig_1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -91,6 +91,7 @@ namespace MextFullstackSaaS.Infrastructure.Persistence.Migrations.ApplicationDB
                     Size = table.Column<int>(type: "integer", nullable: false),
                     Shape = table.Column<int>(type: "integer", nullable: false),
                     Quantity = table.Column<int>(type: "integer", nullable: false),
+                    Description = table.Column<string>(type: "character varying(1000)", maxLength: 1000, nullable: true),
                     Urls = table.Column<string>(type: "text", nullable: false),
                     CreatedOn = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     CreatedByUserId = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
@@ -245,7 +246,7 @@ namespace MextFullstackSaaS.Infrastructure.Persistence.Migrations.ApplicationDB
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedByUserId", "CreatedOn", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "ModifiedByUserId", "ModifiedOn", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("35c16d2a-f25b-4701-9a74-ea1fb7ed6d93"), 0, "0229a7ab-9d44-4acc-b015-7e1b055c3c44", "35c16d2a-f25b-4701-9a74-ea1fb7ed6d93", new DateTimeOffset(new DateTime(2024, 5, 22, 13, 16, 31, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), "mextuser@gmail.com", true, "Mext", "User", false, null, null, null, "MEXTUSER@GMAIL.COM", "MEXTUSER", "AQAAAAIAAYagAAAAEKoV0wYuyFv39yAVFKji+uShVZxJ+cjbQrMtHWNmlIYe/nbcjryMqvpvZXQv7DAadA==", null, false, "6c185769-9f7b-47e8-a70c-dc7b892089de", false, "mextuser" });
+                values: new object[] { new Guid("35c16d2a-f25b-4701-9a74-ea1fb7ed6d93"), 0, "7b95c900-3bd2-41e0-b3f3-ec730507924b", "35c16d2a-f25b-4701-9a74-ea1fb7ed6d93", new DateTimeOffset(new DateTime(2024, 5, 22, 13, 16, 31, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)), "mextuser@gmail.com", true, "Mext", "User", false, null, null, null, "MEXTUSER@GMAIL.COM", "MEXTUSER", "AQAAAAIAAYagAAAAENMG+EfIRRtctGRXPouchAC6n3SUCWwzBKLcZFt8dzLYqT/i+ZfzJvhqD+tqGQIkyg==", null, false, "6c185769-9f7b-47e8-a70c-dc7b892089de", false, "mextuser" });
 
             migrationBuilder.InsertData(
                 table: "UserBalances",

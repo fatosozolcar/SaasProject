@@ -9,11 +9,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace MextFullstackSaaS.Infrastructure.Persistence.Migrations.ApplicationDB
+namespace MextFullstackSaaS.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240528081117_OrderDescriptionFieldAdded")]
-    partial class OrderDescriptionFieldAdded
+    [Migration("20240606120704_mig_1")]
+    partial class mig_1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -323,7 +323,7 @@ namespace MextFullstackSaaS.Infrastructure.Persistence.Migrations.ApplicationDB
                         {
                             Id = new Guid("35c16d2a-f25b-4701-9a74-ea1fb7ed6d93"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "821138da-0451-4372-b1fa-4ddaec035e40",
+                            ConcurrencyStamp = "7b95c900-3bd2-41e0-b3f3-ec730507924b",
                             CreatedByUserId = "35c16d2a-f25b-4701-9a74-ea1fb7ed6d93",
                             CreatedOn = new DateTimeOffset(new DateTime(2024, 5, 22, 13, 16, 31, 0, DateTimeKind.Unspecified), new TimeSpan(0, 3, 0, 0, 0)),
                             Email = "mextuser@gmail.com",
@@ -333,7 +333,7 @@ namespace MextFullstackSaaS.Infrastructure.Persistence.Migrations.ApplicationDB
                             LockoutEnabled = false,
                             NormalizedEmail = "MEXTUSER@GMAIL.COM",
                             NormalizedUserName = "MEXTUSER",
-                            PasswordHash = "AQAAAAIAAYagAAAAELVIGosppO7VambuTPkJ5Qvwn8HrQOAlR2rAQ+WGCXktnL6wQIv4F+SCQWc/R35pQQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENMG+EfIRRtctGRXPouchAC6n3SUCWwzBKLcZFt8dzLYqT/i+ZfzJvhqD+tqGQIkyg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "6c185769-9f7b-47e8-a70c-dc7b892089de",
                             TwoFactorEnabled = false,
